@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useDebounce } from "use-debounce";
 import {
   StyleSheet,
@@ -9,12 +9,14 @@ import {
   FlatList
 } from "react-native";
 import { forecastFor7days } from "../services/index";
+import { WeatherContext } from "../context/weatherContext";
+import { LatLonContext } from "../context/latLonContext";
 
 export const WeeklyScreen = () => {
+  const { cityName } = useContext(WeatherContext);
+  const { lat, lon } = useContext(LatLonContext);
+
   const [weatherData, setWeatherData] = useState(null);
-  const [lat, setLat] = useState(55.6759);
-  const [lon, setLon] = useState(12.5655);
-  //const [debouncedCityValue] = useDebounce(cityName, 1000);
   const [error, setError] = useState("");
 
   const fetchData = async () => {
@@ -50,27 +52,32 @@ export const WeeklyScreen = () => {
               <Text style={[styles.textHeaderSoft, styles.font]}>
                 {day}, {month} {date}
               </Text>
-              <Text style={[styles.textHeader, styles.font]}>Copenhagen</Text>
+              <Text style={[styles.textHeader, styles.font]}>{cityName}</Text>
             </View>
             {weatherData.daily &&
               weatherData.daily.map((day, index) => {
                 return (
                   <View style={styles.viewBottomInside} key={index}>
+                    <Text style={styles.textDate}>
+                      {new Date(day.dt * 1000).toLocaleDateString("en-US", {
+                        weekday: "long"
+                      })}
+                    </Text>
                     <Image
                       style={styles.icon}
                       source={{
                         uri: `http://openweathermap.org/img/wn/${day.weather[0].icon}@4x.png`
                       }}
                     />
-                    <View>
-                      <Text style={styles.textBottom}>
-                        {day.weather[0].main}
-                      </Text>
-                      <Text style={styles.textStrong}>
-                        {Math.ceil(day.temp.day)}
-                        °C
-                      </Text>
-                    </View>
+                    <Text style={styles.textStrong}>{day.weather[0].main}</Text>
+                    <Text style={styles.textBottom}>
+                      {Math.ceil(day.temp.min)}
+                      °C
+                    </Text>
+                    <Text style={styles.textBottom}>
+                      {Math.ceil(day.temp.max)}
+                      °C
+                    </Text>
                   </View>
                 );
               })}
@@ -83,7 +90,7 @@ export const WeeklyScreen = () => {
 
 const styles = StyleSheet.create({
   view: {
-    alignItems: "center",
+    alignItems: "flex-start",
     backgroundColor: "rgba(100, 162, 216, 0.9)",
     color: "#fff",
     flex: 1,
@@ -123,19 +130,31 @@ const styles = StyleSheet.create({
   },
   viewBottomInside: {
     alignItems: "center",
+    backgroundColor: "rgba(256, 256, 256, 0.15)",
     flexDirection: "row",
     justifyContent: "flex-start",
     marginTop: 10
   },
   textBottom: {
     color: "#fff",
-    fontSize: 20,
-    fontWeight: "200"
+    fontSize: 18,
+    fontWeight: "200",
+    marginLeft: 20,
+    width: 50
+  },
+  textDate: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "200",
+    marginLeft: 10,
+    textAlign: "right",
+    width: 100
   },
   textStrong: {
     color: "#fff",
     fontSize: 20,
-    fontWeight: "300"
+    fontWeight: "300",
+    marginRight: 20
   },
   icon: {
     height: 50,

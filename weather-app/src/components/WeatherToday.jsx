@@ -83,12 +83,14 @@ const styles = StyleSheet.create({
   },
   viewBottom: {
     alignItems: "center",
+    backgroundColor: "rgba(256, 256, 256, 0.1)",
     color: "#fff",
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 50,
     paddingHorizontal: 50,
-    paddingVertical: 20,
+    paddingTop: 10,
+    paddingBottom: 20,
     width: "100%"
   },
   icon: {

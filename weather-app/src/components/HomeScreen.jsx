@@ -12,22 +12,24 @@ import { LinearGradient } from "expo-linear-gradient";
 import { WeatherToday } from "./WeatherToday";
 import { getWeatherByCityName } from "../services/index";
 import { WeatherContext } from "../context/weatherContext";
+import { LatLonContext } from "../context/latLonContext";
 
 export const HomeScreen = () => {
-  //const { cityName, setCityName } = useContext(WeatherContext);
+  const { cityName, setCityName } = useContext(WeatherContext);
+  const { setLat, setLon } = useContext(LatLonContext);
   const [weatherData, setWeatherData] = useState(null);
-  const [cityName, setCityName] = useState("Copenhagen");
   const [error, setError] = useState("");
   const [debouncedCityValue] = useDebounce(cityName, 1000);
 
   const fetchData = async () => {
     try {
       const data = await getWeatherByCityName(debouncedCityValue);
+      setLat(data.coord.lat);
+      setLon(data.coord.lon);
       setWeatherData(data);
       setError("");
     } catch (error) {
       setError("Not valid city name");
-      setWeatherData(null);
       console.log(error);
     }
   };
