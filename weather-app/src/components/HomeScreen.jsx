@@ -1,18 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useDebounce } from "use-debounce";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Image,
-  ImageBackground
-} from "react-native";
+import { StyleSheet, Text, View, ImageBackground } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { WeatherToday } from "./WeatherToday";
 import { getWeatherByCityName } from "../services/index";
 import { WeatherContext } from "../context/weatherContext";
 import { LatLonContext } from "../context/latLonContext";
+import { WeatherToday } from "./WeatherToday";
+import { Header } from "./Header";
 
 export const HomeScreen = () => {
   const { cityName, setCityName } = useContext(WeatherContext);
@@ -28,9 +22,12 @@ export const HomeScreen = () => {
       setLon(data.coord.lon);
       setWeatherData(data);
       setError("");
-    } catch (error) {
+    } catch (err) {
       setError("Not valid city name");
-      console.log(error);
+      setWeatherData(null);
+      setLat(null);
+      setLon(null);
+      console.log(err);
     }
   };
 
@@ -55,21 +52,13 @@ export const HomeScreen = () => {
         end={{ x: 0, y: 1 }}
       > */}
       <View style={styles.view}>
-        <View style={styles.viewHeader}>
-          <Text style={[styles.textHeaderSoft, styles.font]}>
-            {day}, {month} {date}
-          </Text>
-          <TextInput
-            style={[styles.textHeader, styles.font]}
-            value={cityName}
-            clearButtonMode="while-editing"
-            onChangeText={setCityName}
-            placeholder={"Type city name"}
-            autoCapitalize="words"
-            textAlign="center"
-            textContentType="location"
-          />
-        </View>
+        <Header
+          day={day}
+          month={month}
+          date={date}
+          cityName={cityName}
+          setCityName={setCityName}
+        />
         {error !== "" ? (
           <Text style={[styles.textError, styles.font]}>{error}</Text>
         ) : !weatherData ? (
