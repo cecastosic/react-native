@@ -28,7 +28,6 @@ export const HomeScreen = () => {
       setLat(null);
       setLon(null);
     }
-    setError("");
   };
 
   useEffect(() => {
