@@ -9,9 +9,30 @@
 
 ---
 
-[
-![video](https://user-images.githubusercontent.com/10253713/105616293-38aa4700-5dd6-11eb-9e87-b780386c6e89.gif)
-](https://user-images.githubusercontent.com/10253713/105616293-38aa4700-5dd6-11eb-9e87-b780386c6e89.gif)
+<div align="center">
+
+<img src="https://user-images.githubusercontent.com/10253713/107143887-c4c08080-6937-11eb-9ff1-3d5fe03f549c.PNG"  width="350" />
+
+</div>
+<br />
+
+<div align="center">
+
+<img src="https://user-images.githubusercontent.com/10253713/107143886-c427ea00-6937-11eb-9afa-ea88fbe0d70d.PNG" width="350" />
+<img src="https://user-images.githubusercontent.com/10253713/107143884-c2f6bd00-6937-11eb-94d1-a4eb95493286.PNG" width="350" />
+
+</div>
+<br />
+
+<div align="center">
+
+<img src="https://user-images.githubusercontent.com/10253713/107143882-beca9f80-6937-11eb-8409-135d3f410d66.PNG" width="350" />
+<img src="https://user-images.githubusercontent.com/10253713/107144127-482ea180-6939-11eb-8a27-bd499c3a8973.PNG" width="350" />
+
+</div>
+<br />
+
+<img src="https://user-images.githubusercontent.com/10253713/107144123-44028400-6939-11eb-924e-ef5d8eed5978.PNG" width="350" />
 
 ---
 
