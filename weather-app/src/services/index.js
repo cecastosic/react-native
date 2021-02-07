@@ -20,11 +20,13 @@ export const getWeatherByCityName = async city => {
   return responseConf(response);
 };
 
-export const getWeatherByCityID = async id => {
-  if (!id) {
-    throw new Error("You need to provide id");
+export const getWeatherByLatLon = async (lat, lon) => {
+  if (!lat || !lon) {
+    throw new Error("You need to provide latitude and longitude");
   }
-  const response = await fetch(`${url}?id=${id}&APPID=${token}`);
+  const response = await fetch(
+    `${url}?lat=${lat}&lon=${lon}&&APPID=${token}&units=metric`
+  );
 
   return responseConf(response);
 };

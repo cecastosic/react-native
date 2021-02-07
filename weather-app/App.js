@@ -7,13 +7,42 @@ import { WeeklyScreen } from "./src/components/WeeklyScreen";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { WeatherContext } from "./src/context/weatherContext";
 import { LatLonContext } from "./src/context/latLonContext";
+import useGeolocation from "react-hook-geolocation";
+import { getWeatherByLatLon } from "./src/services/index";
 
 const Tab = createBottomTabNavigator();
 
 const App = () => {
-  const [cityName, setCityName] = useState("Copenhagen");
+  const geolocation = useGeolocation();
+  const [cityName, setCityName] = useState("");
   const [lat, setLat] = useState(null);
   const [lon, setLon] = useState(null);
+
+  const fetchData = async (lat, lon) => {
+    try {
+      const data = await getWeatherByLatLon(lat, lon);
+      setCityName(data.name);
+    } catch (err) {
+      setLat(null);
+      setLon(null);
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (geolocation.latitude && geolocation.longitude) {
+      try {
+        const { latitude, longitude } = geolocation;
+        setLat(latitude);
+        setLon(longitude);
+        fetchData(latitude, longitude);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      setCityName("Copenhagen");
+    }
+  }, [geolocation]);
 
   return (
     <NavigationContainer>

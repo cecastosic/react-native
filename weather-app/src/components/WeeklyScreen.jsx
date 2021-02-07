@@ -19,7 +19,7 @@ export const WeeklyScreen = () => {
       setWeatherData(data);
       setError("");
     } catch (err) {
-      setError("Not valid city name");
+      setError("Please type a valid city name");
       setWeatherData(null);
       console.log(err);
     }

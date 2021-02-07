@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "rgba(256, 256, 256, 0.15)",
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     marginTop: 10,
     paddingHorizontal: 20,
     width: "100%"
@@ -55,8 +55,8 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "200",
-    marginLeft: 10,
-    textAlign: "right",
+    marginLeft: 5,
+    textAlign: "left",
     width: 100
   },
   textStrong: {
@@ -64,7 +64,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "300",
     marginRight: 5,
-    textAlign: "left"
+    textAlign: "left",
+    width: 90
   },
   icon: {
     height: 50,

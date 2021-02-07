@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useDebounce } from "use-debounce";
 import { StyleSheet, Text, View, ImageBackground } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { getWeatherByCityName } from "../services/index";
+import { getWeatherByCityName, getWeatherByLatLon } from "../services/index";
 import { WeatherContext } from "../context/weatherContext";
 import { LatLonContext } from "../context/latLonContext";
 import { WeatherToday } from "./WeatherToday";
@@ -18,17 +18,17 @@ export const HomeScreen = () => {
   const fetchData = async () => {
     try {
       const data = await getWeatherByCityName(debouncedCityValue);
+      setWeatherData(data);
       setLat(data.coord.lat);
       setLon(data.coord.lon);
-      setWeatherData(data);
       setError("");
     } catch (err) {
-      setError("Not valid city name");
+      setError("Please type a valid city name");
       setWeatherData(null);
       setLat(null);
       setLon(null);
-      console.log(err);
     }
+    setError("");
   };
 
   useEffect(() => {
@@ -94,24 +94,6 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 1,
     width: "100%"
-  },
-  viewHeader: {
-    alignItems: "center",
-    color: "#fff",
-    justifyContent: "center",
-    width: "100%"
-  },
-  textHeader: {
-    fontSize: 26,
-    minWidth: 250,
-    padding: 2
-  },
-  textHeaderSoft: {
-    opacity: 0.8
-  },
-  textHeaderCentered: {
-    fontSize: 20,
-    padding: 2
   },
   textError: {
     fontSize: 26,
