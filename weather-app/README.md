@@ -32,7 +32,11 @@
 </div>
 <br />
 
+<div align="center">
+  
 <img src="https://user-images.githubusercontent.com/10253713/107144123-44028400-6939-11eb-924e-ef5d8eed5978.PNG" width="350" />
+
+</div>
 
 ---
 
